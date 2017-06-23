@@ -1,0 +1,26 @@
+{
+  "name": "split-html-to-chars",
+  "version": "1.0.0",
+  "description": "Splits text inside valid HTML into chars, wrapping them in a given template. Common usage: animating letters of text.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akella/split-html-to-chars.git"
+  },
+  "keywords": [
+    "split",
+    "animation",
+    "chars",
+    "html",
+    "parse"
+  ],
+  "author": "Yuri Artiukh <akella.a@gmail.com> (http://riverco.de)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akella/split-html-to-chars/issues"
+  },
+  "homepage": "https://github.com/akella/split-html-to-chars#readme"
+}
