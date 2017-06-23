@@ -3,15 +3,9 @@ Takes this:
 ```html
 <h2>Some <strong>bold</strong> text<br> with<i>Tags</i></h2>
 ```
-Invoked like this:
-```js
-import Splitter from 'split-html-to-chars';
-
-Splitter(html,'<span class="letter">$</span>');
-```
-Will return this:
+Returns this:
 ```html
-<h2 class="js-splitme">
+<h2>
 	<span class="letter">S</span>
 	<span class="letter">o</span>
 	<span class="letter">m</span>
@@ -41,3 +35,13 @@ Will return this:
 	</i>
 </h2>
 ```
+
+If invoked like this:
+```js
+import Splitter from 'split-html-to-chars';
+
+Splitter(html,'<span class="letter">$</span>');
+```
+
+
+[Yuri akella Artiukh](http://cssing.org.ua)
