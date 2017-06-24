@@ -44,6 +44,7 @@ Splitter(html,'<span class="letter">$</span>');
 ```
 ## Why i did that
 For animations like this one:
+
 ![Letters animation](https://media.giphy.com/media/xUA7b1BODzcUxs9G00/giphy.gif "Letters animation")
 
 Common use case might be replacing HTML on load:
