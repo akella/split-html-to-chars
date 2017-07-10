@@ -1,6 +1,6 @@
 {
   "name": "split-html-to-chars",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Splits text inside valid HTML into chars, wrapping them in a given template. Common usage: animating letters of text.",
   "main": "index.js",
   "scripts": {
