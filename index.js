@@ -164,23 +164,50 @@ var index = {
     stringify: stringify_1
 };
 
-function recur(obj, template) {
+Array.prototype.clean = function (deleteValue) {
+	for (var i = 0; i < this.length; i++) {
+		if (this[i] == deleteValue) {
+			this.splice(i, 1);
+			i--;
+		}
+	}
+	return this;
+};
+
+function recur(obj, template, words) {
 	if (obj.type == "text") {
 		obj.content = obj.content.split(/(?!$)/).map(function (char) {
+			// if(char==' ') {return ' ';}
+			// else {return template.replace(/\$/g, char);}
 			return template.replace(/\$/g, char);
 		}).join("");
+
+		if (words) {
+
+			obj.content = obj.content.split(template.replace(/\$/g, ' ')).clean("").map(function (parsedword) {
+				return words.replace(/\$/g, parsedword);
+			}).join("");
+		}
 	}
 	if (obj.children) {
 		obj.children.forEach(function (tag) {
-			recur(tag, template);
+			recur(tag, template, words);
 		});
 	}
 }
 
-function Splitter(html, template) {
+function Splitter(html, template, words) {
+	// if(words) {
+	// 	html = html
+	// 		.split(' ')
+	// 		.map(parsedword => {
+	// 			return words.replace(/\$/g, parsedword)
+	// 		})
+	// 		.join(" ");
+	// }
 	var ast = index.parse(html);
 	ast.forEach(function (tag) {
-		recur(tag, template);
+		recur(tag, template, words);
 	});
 	return index.stringify(ast);
 }
