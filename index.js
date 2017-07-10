@@ -175,15 +175,13 @@ Array.prototype.clean = function (deleteValue) {
 };
 
 function recur(obj, template, words) {
+	// template = (template =='')? '$' : template;
 	if (obj.type == "text") {
 		obj.content = obj.content.split(/(?!$)/).map(function (char) {
-			// if(char==' ') {return ' ';}
-			// else {return template.replace(/\$/g, char);}
 			return template.replace(/\$/g, char);
 		}).join("");
 
 		if (words) {
-
 			obj.content = obj.content.split(template.replace(/\$/g, ' ')).clean("").map(function (parsedword) {
 				return words.replace(/\$/g, parsedword);
 			}).join("");
@@ -197,14 +195,6 @@ function recur(obj, template, words) {
 }
 
 function Splitter(html, template, words) {
-	// if(words) {
-	// 	html = html
-	// 		.split(' ')
-	// 		.map(parsedword => {
-	// 			return words.replace(/\$/g, parsedword)
-	// 		})
-	// 		.join(" ");
-	// }
 	var ast = index.parse(html);
 	ast.forEach(function (tag) {
 		recur(tag, template, words);

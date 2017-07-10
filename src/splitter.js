@@ -11,12 +11,11 @@ Array.prototype.clean = function(deleteValue) {
 };
 
 function recur(obj, template, words) {
+	// template = (template =='')? '$' : template;
 	if (obj.type == "text") {
 		obj.content = obj.content
 			.split(/(?!$)/u)
 			.map(char => {
-				// if(char==' ') {return ' ';}
-				// else {return template.replace(/\$/g, char);}
 				return template.replace(/\$/g, char)
 			})
 			.join("");
