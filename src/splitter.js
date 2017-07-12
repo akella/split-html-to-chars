@@ -1,37 +1,37 @@
 import HTML from "html-parse-stringify";
 
-function recur(obj, template, words) {
+function SplitText(obj, LetterTemplate, WordTemplate) {
 	if (obj.type == "text") {
 		obj.content = obj.content
 			.split(/(?!$)/u)
 			.map(char => {
-				return template.replace(/\$/g, char);
+				return LetterTemplate.replace(/\$/g, char);
 			})
 			.join("");
 
-		if (words) {
+		if (WordTemplate) {
 			obj.content = obj.content
-				.split(template.replace(/\$/g, " "))
+				.split(LetterTemplate.replace(/\$/g, " "))
 				.filter(item => {
 					return item != "";
 				})
 				.map(parsedword => {
-					return words.replace(/\$/g, parsedword);
+					return WordTemplate.replace(/\$/g, parsedword);
 				})
 				.join("");
 		}
 	}
 	if (obj.children) {
 		obj.children.forEach(tag => {
-			recur(tag, template, words);
+			SplitText(tag, LetterTemplate, WordTemplate);
 		});
 	}
 }
 
-export default function Splitter(html, template, words) {
+export default function Splitter(html, LetterTemplate, WordTemplate) {
 	var ast = HTML.parse(html);
 	ast.forEach(tag => {
-		recur(tag, template, words);
+		SplitText(tag, LetterTemplate, WordTemplate);
 	});
 	return HTML.stringify(ast);
 }

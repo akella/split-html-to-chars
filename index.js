@@ -164,31 +164,31 @@ var index = {
     stringify: stringify_1
 };
 
-function recur(obj, template, words) {
+function SplitText(obj, LetterTemplate, WordTemplate) {
 	if (obj.type == "text") {
 		obj.content = obj.content.split(/(?!$)/).map(function (char) {
-			return template.replace(/\$/g, char);
+			return LetterTemplate.replace(/\$/g, char);
 		}).join("");
 
-		if (words) {
-			obj.content = obj.content.split(template.replace(/\$/g, " ")).filter(function (item) {
+		if (WordTemplate) {
+			obj.content = obj.content.split(LetterTemplate.replace(/\$/g, " ")).filter(function (item) {
 				return item != "";
 			}).map(function (parsedword) {
-				return words.replace(/\$/g, parsedword);
+				return WordTemplate.replace(/\$/g, parsedword);
 			}).join("");
 		}
 	}
 	if (obj.children) {
 		obj.children.forEach(function (tag) {
-			recur(tag, template, words);
+			SplitText(tag, LetterTemplate, WordTemplate);
 		});
 	}
 }
 
-function Splitter(html, template, words) {
+function Splitter(html, LetterTemplate, WordTemplate) {
 	var ast = index.parse(html);
 	ast.forEach(function (tag) {
-		recur(tag, template, words);
+		SplitText(tag, LetterTemplate, WordTemplate);
 	});
 	return index.stringify(ast);
 }
