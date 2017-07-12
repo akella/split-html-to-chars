@@ -28,18 +28,6 @@ function recur(obj, template, words) {
 	}
 }
 
-function splitWords(string, words) {
-	if (words) {
-		string = string
-			.split(" ")
-			.map(word => {
-				return words.replace(/\$/g, word);
-			})
-			.join("");
-	}
-	return string;
-}
-
 export default function Splitter(html, template, words) {
 	var ast = HTML.parse(html);
 	ast.forEach(tag => {
