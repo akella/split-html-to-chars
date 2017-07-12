@@ -164,25 +164,16 @@ var index = {
     stringify: stringify_1
 };
 
-Array.prototype.clean = function (deleteValue) {
-	for (var i = 0; i < this.length; i++) {
-		if (this[i] == deleteValue) {
-			this.splice(i, 1);
-			i--;
-		}
-	}
-	return this;
-};
-
 function recur(obj, template, words) {
-	// template = (template =='')? '$' : template;
 	if (obj.type == "text") {
 		obj.content = obj.content.split(/(?!$)/).map(function (char) {
 			return template.replace(/\$/g, char);
 		}).join("");
 
 		if (words) {
-			obj.content = obj.content.split(template.replace(/\$/g, ' ')).clean("").map(function (parsedword) {
+			obj.content = obj.content.split(template.replace(/\$/g, " ")).filter(function (item) {
+				return item != "";
+			}).map(function (parsedword) {
 				return words.replace(/\$/g, parsedword);
 			}).join("");
 		}
